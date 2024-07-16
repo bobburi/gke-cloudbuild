@@ -1,0 +1,21 @@
+# deployment.yaml
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-flask-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: hello-flask
+  template:
+    metadata:
+      labels:
+        app: hello-flask
+    spec:
+      containers:
+      - name: hello-flask
+        image: gcr.io/clever-overview-426908-k5/hello-flask:v3
+        ports:
+        - containerPort: 5000

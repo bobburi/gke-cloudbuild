@@ -1,0 +1,6 @@
+steps:
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '-t', 'gcr.io/sonorous-saga-427507-v9/my-app', '.']
+
+images:
+  - 'gcr.io/sonorous-saga-427507-v9/my-app'
