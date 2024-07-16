@@ -1,13 +1,23 @@
 steps:
-  # Step 1: Build the Docker image
+  # Step 1: Authenticate using the service account
+  - name: 'gcr.io/cloud-builders/gcloud'
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - |
+        echo $GCLOUD_SERVICE_KEY | gcloud auth activate-service-account --key-file=-
+    env:
+      - 'GCLOUD_SERVICE_KEY=${_GCLOUD_SERVICE_KEY}'
+
+  # Step 2: Build the Docker image
   - name: 'gcr.io/cloud-builders/docker'
     args: ['build', '-t', 'gcr.io/sonorous-saga-427507-v9/my-app', '.']
 
-  # Step 2: Push the Docker image to Google Container Registry
+  # Step 3: Push the Docker image to Google Container Registry
   - name: 'gcr.io/cloud-builders/docker'
     args: ['push', 'gcr.io/sonorous-saga-427507-v9/my-app']
 
-  # Step 3: Deploy the Docker image to GKE
+  # Step 4: Deploy the Docker image to GKE
   - name: 'gcr.io/cloud-builders/kubectl'
     args:
       - 'set'
