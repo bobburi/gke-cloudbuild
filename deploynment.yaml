@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
       - name: hello-flask
-        image: gcr.io/clever-overview-426908-k5/hello-flask:v3
+        image: gcr.io/sonorous-saga-427507-v9/my-app:latest
         ports:
         - containerPort: 5000
